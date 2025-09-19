@@ -6,25 +6,19 @@ import streamlit.components.v1 as components
 import os
 
 # ------------------- Load similarity (split into 8 parts or fallback) -------------------
-@st.cache_resource
 def load_similarity():
-    parts = []
+    similarity = []  # initialize the variable before using it
+
     try:
-        # try loading 8 parts
-        for i in range(8):
-            filename = f"similarity_part_{i+1}.pkl"
-            if not os.path.exists(filename):
-                raise FileNotFoundError
-            with open(filename, "rb") as f:
-                part = pickle.load(f)
-                parts.append(part)
-        similarity = np.vstack(parts)
-        print("✅ Loaded similarity from 8 parts")
+        # assuming you have multiple parts like similarity_part_1.pkl, similarity_part_2.pkl
+        parts = ["similarity_part_1.pkl", "similarity_part_2.pkl"]  # add all your parts here
+        for part_file in parts:
+            with open(part_file, "rb") as f:
+                similarity_part = pickle.load(f)
+                similarity.extend(similarity_part)  # now this works
     except FileNotFoundError:
-        # fallback to full similarity.pkl
-        with open("similarity.pkl", "rb") as f:
-            similarity = pickle.load(f)
-        print("⚠️ Falling back to full similarity.pkl (large file)")
+        print("Some similarity files are missing!")
+
     return similarity
 
 similarity = load_similarity()
