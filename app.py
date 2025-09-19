@@ -56,15 +56,29 @@ selectvalue = st.selectbox("Select movie from dropdown", movies_list)
 
 # ------------------- Recommend function -------------------
 def recommend(movie):
+    # Check if movie exists
+    if movie not in movies["title"].values:
+        st.error("Movie not found in database!")
+        return [], []
+    
     index = movies[movies["title"] == movie].index[0]
+
+    # Check if similarity is loaded properly
+    if index >= len(similarity):
+        st.error("Similarity matrix does not match movie list!")
+        return [], []
+
     distance = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommend_movie = []
     recommend_poster = []
-    for i in distance[1:6]:
+    
+    for i in distance[1:6]:  # top 5 recommendations
         movie_id = movies.iloc[i[0]].id
         recommend_movie.append(movies.iloc[i[0]].title)
         recommend_poster.append(fetch_poster(movie_id))
+    
     return recommend_movie, recommend_poster
+
 
 # ------------------- Show recommendations -------------------
 if st.button("Show Recommend"):
