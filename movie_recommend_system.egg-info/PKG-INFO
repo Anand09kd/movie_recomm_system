@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: movie-recommend-system
+Version: 0.1.0
+Summary: A Python-based movie recommendation system with Streamlit
+Author-email: Anand Kumar <your.email@example.com>
+Requires-Dist: numpy>=1.26
+Requires-Dist: pandas>=2.2
+Requires-Dist: scikit-learn>=1.5
+Requires-Dist: flask>=3.0
+Requires-Dist: streamlit>=1.36

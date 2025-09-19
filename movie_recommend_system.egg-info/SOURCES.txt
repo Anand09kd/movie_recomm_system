@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+movie_recommend_system.egg-info/PKG-INFO
+movie_recommend_system.egg-info/SOURCES.txt
+movie_recommend_system.egg-info/dependency_links.txt
+movie_recommend_system.egg-info/requires.txt
+movie_recommend_system.egg-info/top_level.txt
